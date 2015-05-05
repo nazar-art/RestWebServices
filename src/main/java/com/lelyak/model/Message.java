@@ -1,58 +1,57 @@
 package com.lelyak.model;
 
-import java.util.Date;
-
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 
 @XmlRootElement
 public class Message {
 
-	private long id;
-	private String message;
-	private Date created;
-	private String author;
-	
-	public Message() {
-		super();
-	}
+    private long id;
+    private String message;
+    private Date created;
+    private String author;
 
-	public Message(long id, String message, String author) {
-		super();
-		this.id = id;
-		this.message = message;
-		this.author = author;
-		this.created = new Date();
-	}
+    public Message() {
+        super();
+    }
 
-	public long getId() {
-		return id;
-	}
+    public Message(long id, String message, String author) {
+        super();
+        this.id = id;
+        this.message = message;
+        this.author = author;
+        this.created = new Date();
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public Date getCreated() {
-		return created;
-	}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	public void setCreated(Date created) {
-		this.created = created;
-	}
+    public Date getCreated() {
+        return created;
+    }
 
-	public String getAuthor() {
-		return author;
-	}
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 }
