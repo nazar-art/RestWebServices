@@ -29,4 +29,22 @@ public class MessageService {
         }
         return null;
     }
+
+    public Message addMessage(Message message) {
+        allMessagesList.add(message);
+        return message;
+    }
+
+    public Message updateMessage(Message message) {
+        return null;
+    }
+
+    public void removeMessage(long id) {
+        for (int i = 0; i < allMessagesList.size(); i++) {
+            long currentId = allMessagesList.get(i).getId();
+            if (currentId == id) {
+                allMessagesList.remove(i);
+            }
+        }
+    }
 }
