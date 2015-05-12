@@ -18,6 +18,13 @@ For extracting all messages by specified pagination:
 
      http://localhost:8080/webapi/messages?start=1&size=1
      
+For matrix param use next url (add to header value - customHeaderValue => test header value):
+
+     http://localhost:8080/webapi/injectdemo/annotations;param=value
+     
+For access context param:
+     http://localhost:8080/webapi/injectdemo/context
+     
 ##### If you are Intellij user configure only `http://localhost:8080/`. This will be enough.
 Use `Postman` browser extension for response returning.
       

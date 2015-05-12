@@ -1,6 +1,7 @@
 package com.lelyak.resources;
 
 import com.lelyak.model.Message;
+import com.lelyak.resources.beans.MessageFilterBean;
 import com.lelyak.service.MessageService;
 
 import javax.ws.rs.*;
@@ -14,7 +15,7 @@ public class MessageResource {
 
     MessageService messageService = new MessageService();
 
-    @GET
+    /*@GET
 //    @Produces(MediaType.APPLICATION_XML)
     @Produces(MediaType.APPLICATION_JSON)
     public List<Message> getMessages(@QueryParam("year") int year,
@@ -25,6 +26,18 @@ public class MessageResource {
         }
         if (start > 0 && size > 0) {
             return messageService.getAllMessagesPaginated(start, size);
+        }
+        return messageService.getAllMessages();
+    }*/
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Message> getMessages(@BeanParam MessageFilterBean filterBean) {
+        if (filterBean.getYear() > 0) {
+            return messageService.getAllMessagesForYear(filterBean.getYear());
+        }
+        if (filterBean.getStart() > 0 && filterBean.getSize() > 0) {
+            return messageService.getAllMessagesPaginated(filterBean.getStart(), filterBean.getSize());
         }
         return messageService.getAllMessages();
     }
