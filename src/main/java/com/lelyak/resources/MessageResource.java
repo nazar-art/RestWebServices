@@ -18,7 +18,7 @@ public class MessageResource {
     /*@GET
 //    @Produces(MediaType.APPLICATION_XML)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Message> getMessages(@QueryParam("year") int year,
+    public List<Message> getAllMessages(@QueryParam("year") int year,
                                      @QueryParam("start") int start,
                                      @QueryParam("size") int size) {
         if (year > 0) {
@@ -32,7 +32,7 @@ public class MessageResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Message> getMessages(@BeanParam MessageFilterBean filterBean) {
+    public List<Message> getAllMessages(@BeanParam MessageFilterBean filterBean) {
         if (filterBean.getYear() > 0) {
             return messageService.getAllMessagesForYear(filterBean.getYear());
         }
@@ -69,4 +69,9 @@ public class MessageResource {
         messageService.removeMessage(id);
     }
 
+
+    @Path("/{messageId}/comments")
+    public CommentResource getCommentResource(@PathParam("messageId") long messageId) {
+        return new CommentResource();
+    }
 }
