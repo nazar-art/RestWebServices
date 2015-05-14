@@ -5,7 +5,11 @@ import com.lelyak.resources.beans.MessageFilterBean;
 import com.lelyak.service.MessageService;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 import java.util.List;
 
 @Path("/messages")
@@ -51,9 +55,18 @@ public class MessageResource {
     }
 
     @POST
-    public Message addMessage(Message message) {
+//    public Message addMessage(Message message) {
+    public Response addMessage(Message message, @Context UriInfo uriInfo) {
         // return "POST works";
-        return messageService.addMessage(message);
+//        return messageService.addMessage(message);
+        Message newMessage = messageService.addMessage(message);
+        String newId = String.valueOf(message.getId());
+        URI uri = uriInfo.getAbsolutePathBuilder().path(newId).build();
+        return Response
+//                .status(Response.Status.CREATED)
+                .created(uri)
+                .entity(newMessage)
+                .build();
     }
 
     @PUT
