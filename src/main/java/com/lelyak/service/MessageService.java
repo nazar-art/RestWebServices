@@ -1,6 +1,7 @@
 package com.lelyak.service;
 
 import com.lelyak.database.DatabaseClass;
+import com.lelyak.exception.DataNotFoundException;
 import com.lelyak.model.Message;
 
 import java.util.ArrayList;
@@ -25,7 +26,11 @@ public class MessageService {
     }
 
     public Message getMessage(long messageId) {
-        return allMessages.get(messageId);
+        Message message = allMessages.get(messageId);
+        if (message == null) {
+            throw new DataNotFoundException("message with id: " + messageId + " not found");
+        }
+        return message;
     }
 
     public Message addMessage(Message message) {
