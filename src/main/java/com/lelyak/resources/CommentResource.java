@@ -19,6 +19,13 @@ public class CommentResource {
         return commentService.getAllComments(messageId);
     }
 
+    @GET
+    @Path("/{commentId}")
+    public Comment getComment(@PathParam("messageId") long messageId,
+                              @PathParam("commentId") long commentId) {
+        return commentService.getComment(messageId, commentId);
+    }
+
     @POST
     public Comment addComment(@PathParam("messageId") long messageId, Comment comment) {
         return commentService.addComment(messageId, comment);
@@ -38,13 +45,6 @@ public class CommentResource {
     public void deleteComment(@PathParam("messageId") long messageId,
                               @PathParam("commentId") long commentId) {
         commentService.removeComment(messageId, commentId);
-    }
-
-    @GET
-    @Path("/{commentId}")
-    public Comment getComment(@PathParam("messageId") long messageId,
-                              @PathParam("commentId") long commentId) {
-        return commentService.getComment(messageId, commentId);
     }
 
     //

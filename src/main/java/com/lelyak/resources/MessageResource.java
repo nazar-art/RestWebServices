@@ -48,14 +48,21 @@ public class MessageResource {
 
     @GET
     @Path("/{messageId}")
-//    @Produces(MediaType.APPLICATION_XML)
-    public Message getMessage(@PathParam("messageId") long id) {
-        return messageService.getMessage(id);
-//		return "Got path param: " + messageId;
+    public Message getMessage(@PathParam("messageId") long id, @Context UriInfo uriInfo) {
+        Message message = messageService.getMessage(id);
+        message.addLink(getUriForSelf(uriInfo, message), "self");
+        return message;
+    }
+
+    private String getUriForSelf(UriInfo uriInfo, Message message) {
+        return uriInfo.getBaseUriBuilder()
+                .path(MessageResource.class)
+                .path(Long.toString(message.getId()))
+                .build()
+                .toString();
     }
 
     @POST
-//    public Message addMessage(Message message) {
     public Response addMessage(Message message, @Context UriInfo uriInfo) {
         // return "POST works";
 //        return messageService.addMessage(message);

@@ -2,17 +2,17 @@
 
     http://localhost:8080/messenger2/
     
-    For access resources:    
+    For access resources (Intellij):    
         
-        http://localhost:8080/messenger2/webapi/myresource
+        http://localhost:8080/webapi/myresource
         
     For access message info by Id:
          
-         http://localhost:8080/messenger2/webapi/messages/1
+         http://localhost:8080/webapi/messages/1
          
     For extracting all messages by specified year use:
     
-         http://localhost:8080/messenger2/webapi/messages?year=2015
+         http://localhost:8080/webapi/messages?year=2015
          
     For extracting all messages by specified pagination:
     
