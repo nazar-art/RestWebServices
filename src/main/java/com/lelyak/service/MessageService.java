@@ -15,8 +15,8 @@ public class MessageService {
 
     public MessageService() {
         // hard coded DB mock
-        Message m1 = new Message(1L, "Hello World", "Lelyak");
-        Message m2 = new Message(2L, "Hello Jersey", "Lelyak");
+        Message m1 = new Message(1L, "Hello World", "lelyak");
+        Message m2 = new Message(2L, "Hello Jersey", "lelyak");
         allMessages.put(1L, m1);
         allMessages.put(2L, m2);
     }
