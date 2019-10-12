@@ -1,5 +1,6 @@
 package com.lelyak.service;
 
+import com.google.common.collect.Lists;
 import com.lelyak.database.DatabaseMock;
 import com.lelyak.model.Comment;
 import com.lelyak.model.ErrorMessage;
@@ -7,7 +8,6 @@ import com.lelyak.model.Message;
 
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,11 +17,13 @@ public class CommentService {
 
     public List<Comment> getAllComments(long messageId) {
         Map<Long, Comment> comments = messages.get(messageId).getComments();
-        return new ArrayList<>(comments.values());
+        return Lists.newArrayList(comments.values());
     }
 
     public Comment getComment(long messageId, long commentId) {
-        ErrorMessage errorMessage = new ErrorMessage("Not found", 404, "https://plus.google.com/u/0/109535268464217373186/posts"); // sent link to my Google+ page
+        ErrorMessage errorMessage = new ErrorMessage("Not found",
+                404,
+                "https://plus.google.com/u/0/109535268464217373186/posts"); // sent link to my Google+ page
         Response res = Response.status(Response.Status.NOT_FOUND)
                 .entity(errorMessage)
                 .build();

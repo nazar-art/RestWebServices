@@ -1,8 +1,13 @@
 package com.lelyak.model;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @XmlRootElement
 public class Message {
@@ -11,8 +16,9 @@ public class Message {
     private String message;
     private Date created;
     private String author;
-    private Map<Long, Comment> comments = new HashMap<>();
-    private List<Link> links = new ArrayList<>();
+
+    private List<Link> links = Lists.newArrayList();
+    private Map<Long, Comment> comments = Maps.newHashMap();
 
     public Message() {
         super();
@@ -77,8 +83,10 @@ public class Message {
 
     public void addLink(String url, String rel) {
         Link link = new Link();
+
         link.setLink(url);
         link.setRel(rel);
+
         links.add(link);
     }
 }

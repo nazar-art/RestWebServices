@@ -4,7 +4,15 @@ import com.lelyak.model.Message;
 import com.lelyak.resources.beans.MessageFilterBean;
 import com.lelyak.service.MessageService;
 
-import javax.ws.rs.*;
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -14,7 +22,7 @@ import java.util.List;
 
 @Path("/messages")
 @Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Produces({MediaType.APPLICATION_JSON})
 //@Produces(value = { MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 public class MessageResource {
 
@@ -39,11 +47,13 @@ public class MessageResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Message> getJsonMessages(@BeanParam MessageFilterBean filterBean) {
         System.out.println("JSON method called");
+
         if (filterBean.getYear() > 0) {
             return messageService.getAllMessagesForYear(filterBean.getYear());
         }
         if (filterBean.getStart() > 0 && filterBean.getSize() > 0) {
-            return messageService.getAllMessagesPaginated(filterBean.getStart(), filterBean.getSize());
+            return messageService
+                    .getAllMessagesPaginated(filterBean.getStart(), filterBean.getSize());
         }
         return messageService.getAllMessages();
     }
@@ -52,9 +62,11 @@ public class MessageResource {
     @Produces(MediaType.TEXT_XML)
     public List<Message> getXmlMessages(@BeanParam MessageFilterBean filterBean) {
         System.out.println("XML method called");
+
         if (filterBean.getYear() > 0) {
             return messageService.getAllMessagesForYear(filterBean.getYear());
         }
+
         if (filterBean.getStart() > 0 && filterBean.getSize() > 0) {
             return messageService.getAllMessagesPaginated(filterBean.getStart(), filterBean.getSize());
         }
@@ -65,10 +77,28 @@ public class MessageResource {
     @Path("/{messageId}")
     public Message getMessage(@PathParam("messageId") long id, @Context UriInfo uriInfo) {
         Message message = messageService.getMessage(id);
+
         message.addLink(getUriForSelf(uriInfo, message), "self");
         message.addLink(getUriForProfile(uriInfo, message), "profile");
         message.addLink(getUriForComments(uriInfo, message), "comments");
+
         return message;
+    }
+
+    private String getUriForSelf(UriInfo uriInfo, Message message) {
+        return uriInfo.getBaseUriBuilder()
+                .path(MessageResource.class)
+                .path(Long.toString(message.getId()))
+                .build()
+                .toString();
+    }
+
+    private String getUriForProfile(UriInfo uriInfo, Message message) {
+        URI uri = uriInfo.getBaseUriBuilder()
+                .path(ProfileResource.class)
+                .path(message.getAuthor())
+                .build();
+        return uri.toString();
     }
 
     private String getUriForComments(UriInfo uriInfo, Message message) {
@@ -81,21 +111,6 @@ public class MessageResource {
         return uri.toString();
     }
 
-    private String getUriForProfile(UriInfo uriInfo, Message message) {
-        URI uri = uriInfo.getBaseUriBuilder()
-                .path(ProfileResource.class)
-                .path(message.getAuthor())
-                .build();
-        return uri.toString();
-    }
-
-    private String getUriForSelf(UriInfo uriInfo, Message message) {
-        return uriInfo.getBaseUriBuilder()
-                .path(MessageResource.class)
-                .path(Long.toString(message.getId()))
-                .build()
-                .toString();
-    }
 
     @POST
     public Response addMessage(Message message, @Context UriInfo uriInfo) {
@@ -104,6 +119,7 @@ public class MessageResource {
         Message newMessage = messageService.addMessage(message);
         String newId = String.valueOf(message.getId());
         URI uri = uriInfo.getAbsolutePathBuilder().path(newId).build();
+
         return Response
 //                .status(Response.Status.CREATED)
                 .created(uri)

@@ -12,8 +12,12 @@ public class ProfileService {
     private Map<String, Profile> allProfiles = DatabaseMock.getProfiles();
 
     public ProfileService() {
-        allProfiles.put("lelyak", new Profile(1L, "lelyak", "Nazar", "Lelyak"));
-        allProfiles.put("admin", new Profile(2L, "admin", "Admin", "StrongAdmin"));
+        allProfiles.put("lelyak",
+                new Profile(1L, "lelyak", "Nazar", "Lelyak")
+        );
+        allProfiles.put("admin",
+                new Profile(2L, "admin", "Admin", "StrongAdmin")
+        );
     }
 
     public List<Profile> getAllProfiles() {

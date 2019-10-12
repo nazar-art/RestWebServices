@@ -2,6 +2,7 @@ package com.lelyak.resources.beans;
 
 import javax.ws.rs.QueryParam;
 
+
 public class MessageFilterBean {
 
     @QueryParam("year")
@@ -12,6 +13,7 @@ public class MessageFilterBean {
 
     @QueryParam("size")
     private int size;
+
 
     public int getYear() {
         return year;
