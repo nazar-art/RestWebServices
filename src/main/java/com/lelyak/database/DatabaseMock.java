@@ -6,7 +6,7 @@ import com.lelyak.model.Profile;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class DatabaseClass {
+public final class DatabaseMock {
 
     private static Map<Long, Message> messages = new HashMap<>();
 

@@ -1,6 +1,6 @@
 package com.lelyak.service;
 
-import com.lelyak.database.DatabaseClass;
+import com.lelyak.database.DatabaseMock;
 import com.lelyak.model.Comment;
 import com.lelyak.model.ErrorMessage;
 import com.lelyak.model.Message;
@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class CommentService {
 
-    private Map<Long, Message> messages = DatabaseClass.getMessages();
+    private Map<Long, Message> messages = DatabaseMock.getMessages();
 
     public List<Comment> getAllComments(long messageId) {
         Map<Long, Comment> comments = messages.get(messageId).getComments();

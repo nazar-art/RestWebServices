@@ -1,6 +1,6 @@
 package com.lelyak.service;
 
-import com.lelyak.database.DatabaseClass;
+import com.lelyak.database.DatabaseMock;
 import com.lelyak.model.Profile;
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ProfileService {
 
-    private Map<String, Profile> allProfiles = DatabaseClass.getProfiles();
+    private Map<String, Profile> allProfiles = DatabaseMock.getProfiles();
 
     public ProfileService() {
         allProfiles.put("lelyak", new Profile(1L, "lelyak", "Nazar", "Lelyak"));

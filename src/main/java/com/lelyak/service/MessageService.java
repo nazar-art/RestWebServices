@@ -1,6 +1,6 @@
 package com.lelyak.service;
 
-import com.lelyak.database.DatabaseClass;
+import com.lelyak.database.DatabaseMock;
 import com.lelyak.exception.DataNotFoundException;
 import com.lelyak.model.Message;
 
@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class MessageService {
 
-    private Map<Long, Message> allMessages = DatabaseClass.getMessages();
+    private Map<Long, Message> allMessages = DatabaseMock.getMessages();
 
     public MessageService() {
         // hard coded DB mock
@@ -53,8 +53,10 @@ public class MessageService {
     public List<Message> getAllMessagesForYear(int year) {
         ArrayList<Message> messagesForYear = new ArrayList<>();
         Calendar cal = Calendar.getInstance();
+
         for (Message message : allMessages.values()) {
             cal.setTime(message.getCreated());
+
             if (cal.get(Calendar.YEAR) == year) {
                 messagesForYear.add(message);
             }
@@ -63,7 +65,7 @@ public class MessageService {
     }
 
     public List<Message> getAllMessagesPaginated(int start, int size) {
-        ArrayList<Message> list = new ArrayList<Message>(allMessages.values());
+        ArrayList<Message> list = new ArrayList<>(allMessages.values());
         return list.subList(start, start + size);
     }
 }
