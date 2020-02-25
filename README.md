@@ -12,7 +12,7 @@ For access message info by Id:
          
 For extracting all messages by specified year (use current year):
     
-    http://localhost:8080/webapi/messages?year=2019
+    http://localhost:8080/webapi/messages?year=2020
          
 For extracting all messages by specified pagination:
     
