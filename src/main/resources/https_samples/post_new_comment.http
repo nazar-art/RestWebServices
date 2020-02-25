@@ -1,0 +1,13 @@
+POST localhost:8080/webapi/messages/1/comments
+Content-Type: application/json
+Accept: */*
+Cache-Control: no-cache
+
+{
+  "id": 1,
+  "message": "1 comment",
+  "created": 1570913749583,
+  "author": "lelyak"
+}
+
+###

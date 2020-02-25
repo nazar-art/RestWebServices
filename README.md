@@ -34,6 +34,18 @@ For access context param:
 For access message comment by id, just use:
     
     http://localhost:8080/webapi/messages/2/comments/2
+    
+POST new comment for message (with header and body):
+
+    http://localhost:8080/webapi/messages/1/comments
+    Content-Type: application/json
+    
+    {
+      "id" : 1,
+      "message" : "1 comment",
+      "created" : 1570913749583,
+      "author" : "lelyak"
+    }        
      
 ##### If you are Intellij user configure only `http://localhost:8080/` 
 This will be enough.  

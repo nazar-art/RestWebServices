@@ -1,0 +1,6 @@
+GET localhost:8080/webapi/injectdemo/annotations;param=value
+customHeaderValue: some custom header value
+Accept: */*
+Cache-Control: no-cache
+
+###
