@@ -1,8 +1,13 @@
-### For running you  need to run Apache Tomcat and follow next application url (for Eclipse IDE):
+### Instructions
+#### For running you  need to configure Apache Tomcat:
 
-    http://localhost:8080/messenger2/
+![Intellij Tomcat Configuration](messenger-app-tomcat-configuration.png)
+ 
+#### Navigate to following application URLs for Eclipse IDE:
+
+    http://localhost:8080/messenger-app/
     
-For access resources (Intellij):    
+For access resources for Intellij:    
         
     http://localhost:8080/webapi/myresource
         
@@ -32,5 +37,5 @@ For access message comment by id, just use:
      
 ##### If you are Intellij user configure only `http://localhost:8080/` 
 This will be enough.  
-Use `Postman` browser extension for response returning.
+Use `Postman` browser extension for checking response.
       
